@@ -93,4 +93,32 @@ La refactorización debe conservar el comportamiento
 original de la aplicación. Por ello, antes y
 después de realizar cambios es importante ejecutar
 pruebas que permitan verificar su funcionamiento.
+
+
+  
+## 5. Verificación de la refactorización
+
+Para comprobar que la refactorización conserva
+el comportamiento original de BlossomApp, se
+deben realizar las siguientes pruebas:
+
+1. Intentar confirmar un pago con campos vacíos.
+   Debe mostrarse "Completa los datos de pago".
+
+2. Intentar confirmar un pago sin una sesión
+   autenticada, con los campos completos.
+   Debe mostrarse "No hay un usuario autenticado".
+
+3. Confirmar un pago simulado con una sesión
+   válida y los campos completos.
+   El pedido debe registrarse en Firestore.
+
+4. Comprobar que después de guardar el pedido
+   se muestra la pantalla de confirmación.
+
+Estas pruebas permitirían comparar el comportamiento
+antes y después de la refactorización.
+
+**Estado:** Pruebas propuestas, pendientes de
+ejecución en la aplicación.
   
