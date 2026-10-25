@@ -9,7 +9,7 @@
 ## Índice de prácticas
 
 * [Práctica 1: Clean Code](practica-1/limpieza.md)
-* Práctica 2: Pendiente
+* [Práctica 2: GitFlow y Trunk-Based Development](practica-2/flujo.md) 
 * Práctica 3: Pendiente
 * Práctica 4: Pendiente
 * Práctica 5: Pendiente
