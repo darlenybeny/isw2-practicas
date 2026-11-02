@@ -10,7 +10,7 @@
 
 * [Práctica 1: Clean Code](practica-1/limpieza.md)
 * [Práctica 2: GitFlow y Trunk-Based Development](practica-2/flujo.md)
-* \[Práctica 3: Refactor SOLID](practica-3/despues.md)
+* [Práctica 3: Refactor SOLID](practica-3/despues.md)
 * Práctica 4: Pendiente
 * Práctica 5: Pendiente
 * Práctica 6: Pendiente
