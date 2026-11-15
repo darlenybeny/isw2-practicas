@@ -1,36 +1,36 @@
 
-function procesarCompra(p, cliente) {
-  let t = 0;
-  let d = 0;
+function procesarCompra(productos, cliente) {
+  let total = 0;
+  let descuento = 0;
   let resultado = {};
 
-  if (p && p.length > 0) {
-    for (let i = 0; i < p.length; i++) {
-      if (p[i].precio > 0 && p[i].cantidad > 0) {
-        t = t + p[i].precio * p[i].cantidad;
+  if (productos && productos.length > 0) {
+    for (let i = 0; i < productos.length; i++) {
+      if (productos[i].precio > 0 && productos[i].cantidad > 0) {
+        total = total + productos[i].precio * productos[i].cantidad;
       }
     }
 
     if (cliente === "frecuente") {
-      if (t > 1000) {
-        d = t * 0.10;
+      if (total > 1000) {
+        descuento = total * 0.10;
       } else {
-        d = t * 0.05;
+        descuento = total * 0.05;
       }
     } else {
-      if (t > 1000) {
-        d = t * 0.03;
+      if (total > 1000) {
+        descuento = total * 0.03;
       } else {
-        d = 0;
+        descuento = 0;
       }
     }
 
-    t = t - d;
-    let impuesto = t * 0.15;
-    t = t + impuesto;
+    total = total - descuento;
+    let impuesto = total * 0.15;
+    total = total + impuesto;
 
-    resultado.total = Math.round(t * 100) / 100;
-    resultado.descuento = Math.round(d * 100) / 100;
+    resultado.total = Math.round(total * 100) / 100;
+    resultado.descuento = Math.round(descuento * 100) / 100;
     resultado.impuesto = Math.round(impuesto * 100) / 100;
     resultado.mensaje = "Compra procesada";
   } else {
