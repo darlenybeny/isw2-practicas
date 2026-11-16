@@ -12,7 +12,7 @@
 * [Práctica 2: GitFlow y Trunk-Based Development](practica-2/flujo.md)
 * [Práctica 3: Refactor SOLID](practica-3/despues.md)
 * [Práctica 4: Pruebas unitarias y TDD](practica-4/evidencia.md)
-* Práctica 5: Pendiente
+* [Práctica 5: Clínica de código completa — Clean Code, SOLID y Testing](practica-5/diagnostico.md)
 * Práctica 6: Pendiente
 * Práctica 7: Pendiente
 * Práctica 8: Pendiente
