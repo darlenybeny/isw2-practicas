@@ -1,6 +1,13 @@
 
-const { procesarCompra } = require("./enfermo");
 const assert = require("node:assert/strict");
+
+const { procesarCompra: procesarCompraEnferma } =
+  require("./enfermo");
+
+const { procesarCompra: procesarCompraSana } =
+  require("./sano");
+
+  const procesarCompra = procesarCompraEnferma;
 
 function probar(nombre, ejecutar) {
   try {
@@ -43,4 +50,28 @@ probar("Compra de cliente normal", () => {
   assert.equal(resultado.total, 575);
   assert.equal(resultado.descuento, 0);
   assert.equal(resultado.impuesto, 75);
+});
+
+probar("Ambas versiones mantienen el comportamiento", () => {
+  const escenarios = [
+    { productos: [], cliente: "normal" },
+    { productos: [{ precio: 500, cantidad: 1 }], cliente: "normal" },
+    { productos: [{ precio: 1200, cantidad: 1 }], cliente: "frecuente" },
+    { productos: [{ precio: 1500, cantidad: 1 }], cliente: "normal" },
+    { productos: [{ precio: 800, cantidad: 1 }], cliente: "frecuente" }
+  ];
+
+  for (const escenario of escenarios) {
+    const resultadoOriginal = procesarCompraEnferma(
+      escenario.productos,
+      escenario.cliente
+    );
+
+    const resultadoRefactorizado = procesarCompraSana(
+      escenario.productos,
+      escenario.cliente
+    );
+
+    assert.deepEqual(resultadoRefactorizado, resultadoOriginal);
+  }
 });

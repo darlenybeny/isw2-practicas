@@ -1,72 +1,44 @@
 
-const LIMITE_DESCUENTO = 1000;
-const DESCUENTO_FRECUENTE_ALTO = 0.10;
-const DESCUENTO_FRECUENTE_BAJO = 0.05;
-const DESCUENTO_NORMAL_ALTO = 0.03;
-const TASA_IMPUESTO = 0.15;
-const FACTOR_REDONDEO = 100;
-
-// Responsabilidad: calcular el descuento
-function calcularDescuento(total, cliente) {
-  if (cliente === "frecuente") {
-    if (total > LIMITE_DESCUENTO) {
-      return total * DESCUENTO_FRECUENTE_ALTO;
-    }
-
-    return total * DESCUENTO_FRECUENTE_BAJO;
-  }
-
-  if (total > LIMITE_DESCUENTO) {
-    return total * DESCUENTO_NORMAL_ALTO;
-  }
-
-  return 0;
-}
-
-// Responsabilidad: calcular el impuesto
-function calcularImpuesto(subtotalConDescuento) {
-  return subtotalConDescuento * TASA_IMPUESTO;
-}
-
-// Responsabilidad: procesar la compra
-function procesarCompra(productos, cliente) {
-  let total = 0;
-  let descuento = 0;
+function procesarCompra(p, cliente) {
+  let t = 0;
+  let d = 0;
   let resultado = {};
 
-  // Early Return: salir si no hay productos
-  if (!productos || productos.length === 0) {
+  if (p && p.length > 0) {
+    for (let i = 0; i < p.length; i++) {
+      if (p[i].precio > 0 && p[i].cantidad > 0) {
+        t = t + p[i].precio * p[i].cantidad;
+      }
+    }
+
+    if (cliente === "frecuente") {
+      if (t > 1000) {
+        d = t * 0.10;
+      } else {
+        d = t * 0.05;
+      }
+    } else {
+      if (t > 1000) {
+        d = t * 0.03;
+      } else {
+        d = 0;
+      }
+    }
+
+    t = t - d;
+    let impuesto = t * 0.15;
+    t = t + impuesto;
+
+    resultado.total = Math.round(t * 100) / 100;
+    resultado.descuento = Math.round(d * 100) / 100;
+    resultado.impuesto = Math.round(impuesto * 100) / 100;
+    resultado.mensaje = "Compra procesada";
+  } else {
     resultado.total = 0;
     resultado.descuento = 0;
     resultado.impuesto = 0;
     resultado.mensaje = "Sin productos";
-
-    console.log(resultado.mensaje);
-    return resultado;
   }
-
-  // Calcular subtotal
-  for (let i = 0; i < productos.length; i++) {
-    if (productos[i].precio > 0 && productos[i].cantidad > 0) {
-      total = total + productos[i].precio * productos[i].cantidad;
-    }
-  }
-
-  // Calcular descuento
-  descuento = calcularDescuento(total, cliente);
-
-  // Calcular impuesto mediante una funcion independiente
-  total = total - descuento;
-  let impuesto = calcularImpuesto(total);
-  total = total + impuesto;
-
-  resultado.total =
-    Math.round(total * FACTOR_REDONDEO) / FACTOR_REDONDEO;
-  resultado.descuento =
-    Math.round(descuento * FACTOR_REDONDEO) / FACTOR_REDONDEO;
-  resultado.impuesto =
-    Math.round(impuesto * FACTOR_REDONDEO) / FACTOR_REDONDEO;
-  resultado.mensaje = "Compra procesada";
 
   console.log(resultado.mensaje);
   return resultado;
