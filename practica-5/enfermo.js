@@ -1,4 +1,11 @@
 
+const LIMITE_DESCUENTO = 1000;
+const DESCUENTO_FRECUENTE_ALTO = 0.10;
+const DESCUENTO_FRECUENTE_BAJO = 0.05;
+const DESCUENTO_NORMAL_ALTO = 0.03;
+const TASA_IMPUESTO = 0.15;
+const FACTOR_REDONDEO = 100;
+
 function procesarCompra(productos, cliente) {
   let total = 0;
   let descuento = 0;
@@ -12,26 +19,29 @@ function procesarCompra(productos, cliente) {
     }
 
     if (cliente === "frecuente") {
-      if (total > 1000) {
-        descuento = total * 0.10;
+      if (total > LIMITE_DESCUENTO) {
+        descuento = total * DESCUENTO_FRECUENTE_ALTO;
       } else {
-        descuento = total * 0.05;
+        descuento = total * DESCUENTO_FRECUENTE_BAJO;
       }
     } else {
-      if (total > 1000) {
-        descuento = total * 0.03;
+      if (total > LIMITE_DESCUENTO) {
+        descuento = total * DESCUENTO_NORMAL_ALTO;
       } else {
         descuento = 0;
       }
     }
 
     total = total - descuento;
-    let impuesto = total * 0.15;
+    let impuesto = total * TASA_IMPUESTO;
     total = total + impuesto;
 
-    resultado.total = Math.round(total * 100) / 100;
-    resultado.descuento = Math.round(descuento * 100) / 100;
-    resultado.impuesto = Math.round(impuesto * 100) / 100;
+    resultado.total =
+      Math.round(total * FACTOR_REDONDEO) / FACTOR_REDONDEO;
+    resultado.descuento =
+      Math.round(descuento * FACTOR_REDONDEO) / FACTOR_REDONDEO;
+    resultado.impuesto =
+      Math.round(impuesto * FACTOR_REDONDEO) / FACTOR_REDONDEO;
     resultado.mensaje = "Compra procesada";
   } else {
     resultado.total = 0;
