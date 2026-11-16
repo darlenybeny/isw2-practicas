@@ -6,6 +6,24 @@ const DESCUENTO_NORMAL_ALTO = 0.03;
 const TASA_IMPUESTO = 0.15;
 const FACTOR_REDONDEO = 100;
 
+// Responsabilidad: calcular el descuento
+function calcularDescuento(total, cliente) {
+  if (cliente === "frecuente") {
+    if (total > LIMITE_DESCUENTO) {
+      return total * DESCUENTO_FRECUENTE_ALTO;
+    }
+
+    return total * DESCUENTO_FRECUENTE_BAJO;
+  }
+
+  if (total > LIMITE_DESCUENTO) {
+    return total * DESCUENTO_NORMAL_ALTO;
+  }
+
+  return 0;
+}
+
+// Responsabilidad: procesar la compra
 function procesarCompra(productos, cliente) {
   let total = 0;
   let descuento = 0;
@@ -29,20 +47,8 @@ function procesarCompra(productos, cliente) {
     }
   }
 
-  // Calcular descuentos
-  if (cliente === "frecuente") {
-    if (total > LIMITE_DESCUENTO) {
-      descuento = total * DESCUENTO_FRECUENTE_ALTO;
-    } else {
-      descuento = total * DESCUENTO_FRECUENTE_BAJO;
-    }
-  } else {
-    if (total > LIMITE_DESCUENTO) {
-      descuento = total * DESCUENTO_NORMAL_ALTO;
-    } else {
-      descuento = 0;
-    }
-  }
+  // Calcular descuento mediante una funcion independiente
+  descuento = calcularDescuento(total, cliente);
 
   // Calcular impuesto
   total = total - descuento;
