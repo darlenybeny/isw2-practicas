@@ -23,6 +23,11 @@ function calcularDescuento(total, cliente) {
   return 0;
 }
 
+// Responsabilidad: calcular el impuesto
+function calcularImpuesto(subtotalConDescuento) {
+  return subtotalConDescuento * TASA_IMPUESTO;
+}
+
 // Responsabilidad: procesar la compra
 function procesarCompra(productos, cliente) {
   let total = 0;
@@ -47,12 +52,12 @@ function procesarCompra(productos, cliente) {
     }
   }
 
-  // Calcular descuento mediante una funcion independiente
+  // Calcular descuento
   descuento = calcularDescuento(total, cliente);
 
-  // Calcular impuesto
+  // Calcular impuesto mediante una funcion independiente
   total = total - descuento;
-  let impuesto = total * TASA_IMPUESTO;
+  let impuesto = calcularImpuesto(total);
   total = total + impuesto;
 
   resultado.total =
