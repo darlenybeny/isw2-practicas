@@ -13,7 +13,7 @@
 * [Práctica 3: Refactor SOLID](practica-3/despues.md)
 * [Práctica 4: Pruebas unitarias y TDD](practica-4/evidencia.md)
 * [Práctica 5: Clínica de código completa — Clean Code, SOLID y Testing](practica-5/diagnostico.md)
-* Práctica 6: Pendiente
+* [Práctica 6: Arquitectura C4 de LeoContigo](practica-6/arquitectura.md)
 * Práctica 7: Pendiente
 * Práctica 8: Pendiente
 * Práctica 9: Pendiente
