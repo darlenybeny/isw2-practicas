@@ -52,3 +52,8 @@ registran mediante commits descriptivos siguiendo
 
 el formato tipo(alcance): descripción.
 
+
+## Verificación de autoría
+
+**Proyecto final:** LeoContigo  
+**Código de verificación:** LEARN-CAP-01FB0891
